@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/constants/sizes.dart';
-import 'package:meeting_organizer/screens/home_screen/widgets/clouds.dart';
+import 'package:meeting_organizer/screens/home_screen/widgets/background.dart';
 import 'package:meeting_organizer/screens/home_screen/widgets/google_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,17 +19,6 @@ class HomeScreen extends StatelessWidget {
           ),
           Clouds(),
           GoogleButton(),
-          Column(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: kHPad, vertical: kVPad * 2),
-                child: Image.asset(
-                  'assets/icons/signin.png',
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     );
