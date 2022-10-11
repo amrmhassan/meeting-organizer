@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
+import 'package:meeting_organizer/constants/colors.dart';
 import 'package:meeting_organizer/screens/groups_screen/groups_screen.dart';
 import 'package:meeting_organizer/screens/home_screen/home_screen.dart';
 import 'package:meeting_organizer/screens/meetings_screen/meetings_screen.dart';
@@ -29,7 +30,7 @@ class _HolderScreenState extends State<HolderScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: Icon(Icons.menu),
-        backgroundColor: const Color(0xff7C80FF),
+        backgroundColor: kPrimaryColor,
         title: Center(
             child: Text(
           titles[initIndex],
@@ -37,17 +38,16 @@ class _HolderScreenState extends State<HolderScreen> {
             fontSize: 22,
           ),
         )),
-        actions: const [
+        actions: [
           CircleAvatar(
             radius: 22,
-            backgroundImage: NetworkImage(
-                'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png'),
+            backgroundImage: AssetImage('assets/icons/person.png'),
           )
         ],
       ),
       body: screens[initIndex],
       bottomNavigationBar: CircleNavBar(
-        activeIcons: const [
+        activeIcons: [
           Icon(Icons.group, color: Colors.white),
           Icon(Icons.home, color: Colors.white),
           Icon(Icons.call_rounded, color: Colors.white),
@@ -61,7 +61,7 @@ class _HolderScreenState extends State<HolderScreen> {
                   ),
                 ))
             .toList(),
-        color: const Color(0xff7C80FF),
+        color: kPrimaryColor,
         height: 60,
         circleWidth: 55,
         initIndex: 1,
@@ -70,7 +70,7 @@ class _HolderScreenState extends State<HolderScreen> {
             initIndex = v;
           });
         },
-        shadowColor: Color(0xff7C80FF),
+        shadowColor: kPrimaryColor,
         elevation: 10,
       ),
     );

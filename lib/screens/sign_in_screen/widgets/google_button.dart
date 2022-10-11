@@ -14,7 +14,6 @@ class GoogleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       bottom: 40,
-      // right: Responsive.getWidth(context) / 2 - 50,
       child: ButtonWrapper(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
