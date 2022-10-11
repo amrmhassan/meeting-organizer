@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/constants/sizes.dart';
 import 'package:meeting_organizer/global/widgets/button_wrapper.dart';
+import 'package:meeting_organizer/screens/holder_screen/holder_screen.dart';
 
 class GoogleButton extends StatelessWidget {
   const GoogleButton({
@@ -15,7 +16,11 @@ class GoogleButton extends StatelessWidget {
       bottom: 40,
       // right: Responsive.getWidth(context) / 2 - 50,
       child: ButtonWrapper(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return HolderScreen();
+          }));
+        },
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(500),
           color: Colors.white,
