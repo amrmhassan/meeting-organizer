@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/constants/sizes.dart';
 import 'package:meeting_organizer/global/widgets/button_wrapper.dart';
+import 'package:meeting_organizer/helper/authentication.dart';
 import 'package:meeting_organizer/screens/holder_screen/holder_screen.dart';
 
 class GoogleButton extends StatelessWidget {
@@ -16,9 +17,10 @@ class GoogleButton extends StatelessWidget {
       bottom: 40,
       child: ButtonWrapper(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return HolderScreen();
-          }));
+          // Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //   return HolderScreen();
+          // }));
+          Authentication().signInWithGoogle();
         },
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(500),
