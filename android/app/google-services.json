@@ -22,55 +22,11 @@
           }
         },
         {
-          "client_id": "279606639513-e9o0e8tnk4551768ha1svoo86ai2s9ut.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBm6lsyzNd4re1qDsDzF4pFQFVgovcdYk0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "279606639513-e9o0e8tnk4551768ha1svoo86ai2s9ut.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "279606639513-rhn0565ko6rd4mucjoiv05lehs5hvo2p.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.meetingOrganizer"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:279606639513:android:8cf1f4501743c4a391f108",
-        "android_client_info": {
-          "package_name": "com.example.meeting_organizer"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "279606639513-98rco14v5am4j32tcuj2dlt2khmdfe5d.apps.googleusercontent.com",
+          "client_id": "279606639513-nlphjnt6seb6bs11csh8ndf3nlfc37ph.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.meeting_organizer",
+            "package_name": "com.amh.meeting_organizer",
             "certificate_hash": "247b630fac2d7a9e53b93eb636075c1292572055"
-          }
-        },
-        {
-          "client_id": "279606639513-conc6iomtaq4968fvjq6noa9dciu72uj.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.meeting_organizer",
-            "certificate_hash": "4ca276ba434cf5c5b4a1b079f9a178df30a5998d"
           }
         },
         {
