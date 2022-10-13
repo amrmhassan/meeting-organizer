@@ -44,40 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBYarjtb7T-8nQdo3VnuNIKa08lmZq3Fl8',
-    appId: '1:18222945633:web:f0c568d2965d172c17e120',
-    messagingSenderId: '18222945633',
-    projectId: 'meeting-organizer-3e118',
-    authDomain: 'meeting-organizer-3e118.firebaseapp.com',
-    storageBucket: 'meeting-organizer-3e118.appspot.com',
-    measurementId: 'G-3WX40E7T54',
+    apiKey: 'AIzaSyADYsMVz-hEXEJTFdKswtb7m48iBtKAmjg',
+    appId: '1:279606639513:web:9c922faac4629bdb91f108',
+    messagingSenderId: '279606639513',
+    projectId: 'meeting-organizer-56d96',
+    authDomain: 'meeting-organizer-56d96.firebaseapp.com',
+    storageBucket: 'meeting-organizer-56d96.appspot.com',
+    measurementId: 'G-CXVHGHYNDC',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC8jT_3rZcmcb4u7ii3v22_kP4SFcMR4Iw',
-    appId: '1:18222945633:android:f01cfaf4e1918b2217e120',
-    messagingSenderId: '18222945633',
-    projectId: 'meeting-organizer-3e118',
-    storageBucket: 'meeting-organizer-3e118.appspot.com',
+    apiKey: 'AIzaSyBm6lsyzNd4re1qDsDzF4pFQFVgovcdYk0',
+    appId: '1:279606639513:android:8cf1f4501743c4a391f108',
+    messagingSenderId: '279606639513',
+    projectId: 'meeting-organizer-56d96',
+    storageBucket: 'meeting-organizer-56d96.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCbKicO-kp75nFy9nCg074Q5s-eFHQa7Lw',
-    appId: '1:18222945633:ios:c9a9b0b4a92b58fb17e120',
-    messagingSenderId: '18222945633',
-    projectId: 'meeting-organizer-3e118',
-    storageBucket: 'meeting-organizer-3e118.appspot.com',
-    iosClientId: '18222945633-3mjo8gckdfg4tmbhni0svk0b7ua42juv.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDcWN6BhPg6vW8_DoYGXA8OJvOq6RYU2Aw',
+    appId: '1:279606639513:ios:0508c2f6c830453c91f108',
+    messagingSenderId: '279606639513',
+    projectId: 'meeting-organizer-56d96',
+    storageBucket: 'meeting-organizer-56d96.appspot.com',
+    iosClientId: '279606639513-rhn0565ko6rd4mucjoiv05lehs5hvo2p.apps.googleusercontent.com',
     iosBundleId: 'com.example.meetingOrganizer',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCbKicO-kp75nFy9nCg074Q5s-eFHQa7Lw',
-    appId: '1:18222945633:ios:c9a9b0b4a92b58fb17e120',
-    messagingSenderId: '18222945633',
-    projectId: 'meeting-organizer-3e118',
-    storageBucket: 'meeting-organizer-3e118.appspot.com',
-    iosClientId: '18222945633-3mjo8gckdfg4tmbhni0svk0b7ua42juv.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDcWN6BhPg6vW8_DoYGXA8OJvOq6RYU2Aw',
+    appId: '1:279606639513:ios:0508c2f6c830453c91f108',
+    messagingSenderId: '279606639513',
+    projectId: 'meeting-organizer-56d96',
+    storageBucket: 'meeting-organizer-56d96.appspot.com',
+    iosClientId: '279606639513-rhn0565ko6rd4mucjoiv05lehs5hvo2p.apps.googleusercontent.com',
     iosBundleId: 'com.example.meetingOrganizer',
   );
 }

@@ -1,57 +1,34 @@
 {
   "project_info": {
-    "project_number": "18222945633",
-    "project_id": "meeting-organizer-3e118",
-    "storage_bucket": "meeting-organizer-3e118.appspot.com"
+    "project_number": "279606639513",
+    "project_id": "meeting-organizer-56d96",
+    "storage_bucket": "meeting-organizer-56d96.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:18222945633:android:f01cfaf4e1918b2217e120",
+        "mobilesdk_app_id": "1:279606639513:android:8cf1f4501743c4a391f108",
         "android_client_info": {
           "package_name": "com.example.meeting_organizer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "18222945633-l9oohlv336vjapkvrop0bondahagk45t.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.meeting_organizer",
-            "certificate_hash": "4ca276ba434cf5c5b4a1b079f9a178df30a5998d"
-          }
-        },
-        {
-          "client_id": "18222945633-t95a1onfgpc06vak3euvrilsthf1vril.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.meeting_organizer",
-            "certificate_hash": "247b630fac2d7a9e53b93eb636075c1292572055"
-          }
-        },
-        {
-          "client_id": "18222945633-nutdscjg4ilc623g980eor2v68sblm5t.apps.googleusercontent.com",
+          "client_id": "279606639513-e9o0e8tnk4551768ha1svoo86ai2s9ut.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC8jT_3rZcmcb4u7ii3v22_kP4SFcMR4Iw"
+          "current_key": "AIzaSyBm6lsyzNd4re1qDsDzF4pFQFVgovcdYk0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "18222945633-nutdscjg4ilc623g980eor2v68sblm5t.apps.googleusercontent.com",
+              "client_id": "279606639513-e9o0e8tnk4551768ha1svoo86ai2s9ut.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "18222945633-3mjo8gckdfg4tmbhni0svk0b7ua42juv.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.meetingOrganizer"
-              }
             }
           ]
         }
