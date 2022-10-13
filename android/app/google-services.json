@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "18222945633-l9oohlv336vjapkvrop0bondahagk45t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.meeting_organizer",
+            "certificate_hash": "4ca276ba434cf5c5b4a1b079f9a178df30a5998d"
+          }
+        },
+        {
+          "client_id": "18222945633-t95a1onfgpc06vak3euvrilsthf1vril.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.meeting_organizer",
+            "certificate_hash": "247b630fac2d7a9e53b93eb636075c1292572055"
+          }
+        },
+        {
           "client_id": "18222945633-nutdscjg4ilc623g980eor2v68sblm5t.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +45,13 @@
             {
               "client_id": "18222945633-nutdscjg4ilc623g980eor2v68sblm5t.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "18222945633-3mjo8gckdfg4tmbhni0svk0b7ua42juv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.meetingOrganizer"
+              }
             }
           ]
         }

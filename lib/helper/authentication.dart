@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meeting_organizer/screens/holder_screen/holder_screen.dart';
@@ -17,7 +20,7 @@ class Authentication {
         });
   }
 
-  signInWithGoogle() async {
+  Future signInWithGoogle() async {
     final GoogleSignInAccount? googleUser =
         await GoogleSignIn(scopes: ["email"]).signIn();
 
@@ -32,7 +35,16 @@ class Authentication {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  signOut() {
-    FirebaseAuth.instance.signOut();
+  signOut() async {
+    try {
+      FirebaseAuth.instance.signOut();
+      final GoogleSignIn google = GoogleSignIn();
+      await google.disconnect();
+      await google.signOut();
+    } catch (e) {
+      if (kDebugMode) {
+        print('cant sign out google');
+      }
+    }
   }
 }

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:meeting_organizer/constants/colors.dart';
+import 'package:meeting_organizer/helper/authentication.dart';
 import 'package:meeting_organizer/screens/groups_screen/groups_screen.dart';
 import 'package:meeting_organizer/screens/home_screen/home_screen.dart';
 import 'package:meeting_organizer/screens/meetings_screen/meetings_screen.dart';
@@ -39,9 +40,14 @@ class _HolderScreenState extends State<HolderScreen> {
           ),
         )),
         actions: [
-          CircleAvatar(
-            radius: 22,
-            backgroundImage: AssetImage('assets/icons/person.png'),
+          GestureDetector(
+            onTap: () {
+              Authentication().signOut();
+            },
+            child: CircleAvatar(
+              radius: 22,
+              backgroundImage: AssetImage('assets/icons/person.png'),
+            ),
           )
         ],
       ),
