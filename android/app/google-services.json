@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "279606639513-s1p9csa62esoppee4rq2dkj7mdrpgagk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amh.meeting_organizer",
+            "certificate_hash": "7b2dd50a66939bcea4c418038800febf9ee79503"
+          }
+        },
+        {
           "client_id": "279606639513-e9o0e8tnk4551768ha1svoo86ai2s9ut.apps.googleusercontent.com",
           "client_type": 3
         }
