@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:meeting_organizer/screens/home_screen/widgets/meeting_item.dart';
 import 'package:meeting_organizer/screens/meetings_screen/upcoming/widgets/upcomingItems.dart';
 
-class upcoming extends StatelessWidget {
+class Upcoming extends StatelessWidget {
+  const Upcoming({super.key});
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),

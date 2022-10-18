@@ -1,11 +1,13 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/screens/meetings_screen/finished/widget/finished_item.dart';
 
-class finished extends StatelessWidget {
+class Finished extends StatelessWidget {
+  const Finished({super.key});
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),

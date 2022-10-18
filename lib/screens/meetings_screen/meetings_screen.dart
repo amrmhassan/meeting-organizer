@@ -13,8 +13,8 @@ class MeetingsScreen extends StatefulWidget {
 
 class _MeetingsScreen extends State<MeetingsScreen> {
   final List<Widget> screens = [
-    finished(),
-    upcoming(),
+    Finished(),
+    Upcoming(),
   ];
   var radius = Radius.circular(20);
   int initialIndex = 1;
