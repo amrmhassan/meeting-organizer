@@ -1,16 +1,14 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MeetingItem extends StatelessWidget {
-  const MeetingItem({super.key});
-
+class upcoming_item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return GestureDetector(
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 22.0,
+          horizontal: 16.0,
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -26,7 +24,7 @@ class MeetingItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
-                  padding: EdgeInsets.fromLTRB(22, 12, 22, 12),
+                  padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
                   child: Text(
                     'Reading clean code book ',
                     maxLines: 1,
@@ -35,6 +33,21 @@ class MeetingItem extends StatelessWidget {
                         color: Color(0xff7C80FF),
                         fontSize: 20,
                         fontWeight: FontWeight.w500),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20.0, 5, 20, 5),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.schedule,
+                        size: 20,
+                      ),
+                      Text(
+                        ' Tomorrow , 12:00 PM',
+                        style: TextStyle(fontSize: 18),
+                      )
+                    ],
                   ),
                 ),
                 Padding(

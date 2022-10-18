@@ -30,13 +30,14 @@ class _HolderScreenState extends State<HolderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         leading: Icon(Icons.menu),
         backgroundColor: kPrimaryColor,
         title: Center(
             child: Text(
           titles[initIndex],
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 25,
           ),
         )),
         actions: [
@@ -44,9 +45,12 @@ class _HolderScreenState extends State<HolderScreen> {
             onTap: () {
               Authentication().signOut();
             },
-            child: CircleAvatar(
-              radius: 22,
-              backgroundImage: AssetImage('assets/icons/person.png'),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CircleAvatar(
+                radius: 18,
+                backgroundImage: AssetImage('assets/icons/person.png'),
+              ),
             ),
           )
         ],
