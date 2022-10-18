@@ -12,6 +12,7 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        clipBehavior: Clip.none,
         alignment: Alignment.topCenter,
         children: [
           Background(),
