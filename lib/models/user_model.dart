@@ -2,7 +2,6 @@ class UserModel {
   late String userID;
   late String userGID; //from google
   late int weight;
-
   UserModel({
     required this.userID,
     required this.userGID,
