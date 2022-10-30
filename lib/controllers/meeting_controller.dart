@@ -46,6 +46,7 @@ class MeetingController with ChangeNotifier {
       votes: 0,
     );
     selectedMeeting!.proposedTimes.add(newMeetingTime);
+    notifyListeners();
   }
 
   void removeProposeTime(String meetingID, DateTime proposedTime) {
@@ -53,6 +54,7 @@ class MeetingController with ChangeNotifier {
     selectedMeeting!.proposedTimes.removeWhere(
       (proposedTimeItem) => proposedTimeItem.proposedTime == proposedTime,
     );
+    notifyListeners();
   }
 
   void addVote(String meetingID, DateTime proposedTime, UserModel voter) {
@@ -61,6 +63,7 @@ class MeetingController with ChangeNotifier {
       if (time.proposedTime == proposedTime && !time.voters.contains(voter)) {
         time.votes += voter.weight;
         time.voters.add(voter);
+        notifyListeners();
       }
     }
   }
@@ -71,6 +74,7 @@ class MeetingController with ChangeNotifier {
       if (time.proposedTime == proposedTime && time.voters.contains(voter)) {
         time.votes -= voter.weight;
         time.voters.remove(voter);
+        notifyListeners();
       }
     }
   }
@@ -79,6 +83,7 @@ class MeetingController with ChangeNotifier {
     var selectedMeeting = getMeetingById(meetingID);
     if (!selectedMeeting!.attendees.contains(attendee)) {
       selectedMeeting.attendees.add(attendee);
+      notifyListeners();
     }
   }
 
@@ -86,6 +91,7 @@ class MeetingController with ChangeNotifier {
     var selectedMeeting = getMeetingById(meetingID);
     if (selectedMeeting!.attendees.contains(attendee)) {
       selectedMeeting.attendees.remove(attendee);
+      notifyListeners();
     }
   }
 }
