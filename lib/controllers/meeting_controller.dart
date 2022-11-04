@@ -4,7 +4,7 @@ import 'package:meeting_organizer/models/meeting_time_model.dart';
 import 'package:meeting_organizer/models/user_model.dart';
 import 'package:uuid/uuid.dart';
 
-class MeetingController with ChangeNotifier {
+class MeetingsProvider with ChangeNotifier {
   List<MeetingModel> meetings = [];
 
   void getMeetings() {
