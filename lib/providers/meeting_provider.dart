@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:meeting_organizer/constants/golobal.dart';
 import 'package:meeting_organizer/models/meeting_model.dart';
 import 'package:meeting_organizer/models/meeting_time_model.dart';
 import 'package:meeting_organizer/models/user_model.dart';
@@ -17,18 +20,27 @@ class MeetingsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getMeetings() {
+  Future<void> getMeetings() async {
+    await FirebaseFirestore.instance
+        .collection(MEETINGS_COLLECTION)
+        .get()
+        .then((value) => value.docs.forEach((meeting) {
+              _meetings.add(MeetingModel.fromJson(meeting.data()));
+            }))
+        .catchError((error) {
+      print(error.toString());
+    });
     notifyListeners();
   }
 
 //? to add a new meeting
-  void addMeeting({
+  addMeeting({
     required String meetingName,
     required String groupId,
     required String creatorId,
   }) {
     MeetingModel newMeeting = MeetingModel(
-      meetingID: const Uuid().toString(),
+      meetingID: const Uuid().v4(),
       meetingName: meetingName,
       groupID: groupId,
       creatorID: creatorId,
@@ -36,7 +48,16 @@ class MeetingsProvider with ChangeNotifier {
       proposedTimes: [],
       attendees: [],
     );
-    _meetings.add(newMeeting);
+    FirebaseFirestore.instance
+        .collection(MEETINGS_COLLECTION)
+        .doc(newMeeting.meetingID)
+        .set(newMeeting.toJson())
+        .then((value) async {
+      _meetings = [];
+      getMeetings();
+    }).catchError((error) {
+      print(error.toString());
+    });
     notifyListeners();
   }
 

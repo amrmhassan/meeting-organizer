@@ -34,8 +34,7 @@ class _HolderScreenState extends State<HolderScreen> {
   void initState() {
     Future.delayed(Duration.zero).then((value) {
       //? loading the fake data to the app
-      Provider.of<MeetingsProvider>(context, listen: false)
-          .loadFakeMeetings(fake_meetings);
+      Provider.of<MeetingsProvider>(context, listen: false).getMeetings();
     });
     super.initState();
   }
