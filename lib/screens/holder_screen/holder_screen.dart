@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:meeting_organizer/constants/colors.dart';
 import 'package:meeting_organizer/helper/authentication.dart';
 import 'package:meeting_organizer/screens/groups_screen/groups_screen.dart';
+import 'package:meeting_organizer/screens/holder_screen/component/iconAdd.dart';
 import 'package:meeting_organizer/screens/home_screen/home_screen.dart';
 import 'package:meeting_organizer/screens/meetings_screen/meetings_screen.dart';
 
@@ -41,17 +41,22 @@ class _HolderScreenState extends State<HolderScreen> {
           ),
         )),
         actions: [
-          GestureDetector(
-            onTap: () {
-              Authentication().signOut();
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: CircleAvatar(
-                radius: 18,
-                backgroundImage: AssetImage('assets/icons/person.png'),
+          Row(
+            children: [
+              iconAdd(initIndex: initIndex, context: context),
+              GestureDetector(
+                onTap: () {
+                  Authentication().signOut();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: CircleAvatar(
+                    radius: 18,
+                    backgroundImage: AssetImage('assets/icons/person.png'),
+                  ),
+                ),
               ),
-            ),
+            ],
           )
         ],
       ),

@@ -1,13 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:meeting_organizer/screens/votes_screen/votes_screen.dart';
 
 class MeetingItem extends StatelessWidget {
-  const MeetingItem({super.key});
-
+  MeetingItem({super.key});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (builder) {
+          return VotesScreen();
+        }));
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 22.0,

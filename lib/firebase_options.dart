@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '279606639513',
     projectId: 'meeting-organizer-56d96',
     storageBucket: 'meeting-organizer-56d96.appspot.com',
-    iosClientId: '279606639513-rhn0565ko6rd4mucjoiv05lehs5hvo2p.apps.googleusercontent.com',
+    iosClientId:
+        '279606639513-rhn0565ko6rd4mucjoiv05lehs5hvo2p.apps.googleusercontent.com',
     iosBundleId: 'com.example.meetingOrganizer',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '279606639513',
     projectId: 'meeting-organizer-56d96',
     storageBucket: 'meeting-organizer-56d96.appspot.com',
-    iosClientId: '279606639513-rhn0565ko6rd4mucjoiv05lehs5hvo2p.apps.googleusercontent.com',
+    iosClientId:
+        '279606639513-rhn0565ko6rd4mucjoiv05lehs5hvo2p.apps.googleusercontent.com',
     iosBundleId: 'com.example.meetingOrganizer',
   );
 }
