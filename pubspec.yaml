@@ -29,13 +29,14 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+
+  flutter:
+    sdk: flutter
   circle_nav_bar: 1.0.2
   circular_bottom_navigation: ^2.2.0
   cupertino_icons: ^1.0.2
   firebase_auth: ^3.11.2
   firebase_core: ^1.24.0
-  flutter:
-    sdk: flutter
   google_sign_in: ^5.4.2
   provider: ^6.0.4
   uuid: ^3.0.6
