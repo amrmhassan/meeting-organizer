@@ -11,12 +11,16 @@ class MeetingsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addMeeting(String meetingName) {
+  void addMeeting({
+    required String meetingName,
+    required String groupId,
+    required String creatorId,
+  }) {
     MeetingModel newMeeting = MeetingModel(
       meetingID: const Uuid().toString(),
       meetingName: meetingName,
-      groupID: 'id of the group',
-      creatorID: 'this user id',
+      groupID: groupId,
+      creatorID: creatorId,
       createdTime: DateTime.now().toString(),
       proposedTimes: [],
       attendees: [],
