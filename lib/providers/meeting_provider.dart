@@ -32,7 +32,7 @@ class MeetingsProvider with ChangeNotifier {
   addMeeting({
     required String meetingName,
     required String groupId,
-  }) {
+  }) async {
     User? currentUser = FirebaseAuth.instance.currentUser;
     MeetingModel newMeeting = MeetingModel(
       meetingID: const Uuid().v4(),
@@ -45,14 +45,12 @@ class MeetingsProvider with ChangeNotifier {
       creatorPhoto: currentUser.photoURL,
       creatorName: currentUser.displayName.toString(),
     );
-    FirebaseFirestore.instance
+    _meetings.add(newMeeting);
+    notifyListeners();
+    await FirebaseFirestore.instance
         .collection(MEETINGS_COLLECTION)
         .doc(newMeeting.meetingID)
-        .set(newMeeting.toJson())
-        .then((value) async {
-      _meetings.add(newMeeting);
-      notifyListeners();
-    }).catchError((error) {});
+        .set(newMeeting.toJson());
   }
 
 //? to delete a meeting
