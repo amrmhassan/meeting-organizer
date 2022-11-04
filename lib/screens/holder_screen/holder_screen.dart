@@ -2,12 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:meeting_organizer/constants/colors.dart';
-import 'package:meeting_organizer/constants/fake_data.dart';
-import 'package:meeting_organizer/helper/authentication.dart';
 import 'package:meeting_organizer/providers/meeting_provider.dart';
 import 'package:meeting_organizer/screens/groups_screen/groups_screen.dart';
 import 'package:meeting_organizer/screens/holder_screen/widgets/holder_screen_appbar_actions.dart';
-import 'package:meeting_organizer/screens/holder_screen/widgets/iconAdd.dart';
 import 'package:meeting_organizer/screens/home_screen/home_screen.dart';
 import 'package:meeting_organizer/screens/meetings_screen/meetings_screen.dart';
 import 'package:provider/provider.dart';
@@ -47,12 +44,13 @@ class _HolderScreenState extends State<HolderScreen> {
         leading: Icon(Icons.menu),
         backgroundColor: kPrimaryColor,
         title: Center(
-            child: Text(
-          titles[initIndex],
-          style: TextStyle(
-            fontSize: 25,
+          child: Text(
+            titles[initIndex],
+            style: TextStyle(
+              fontSize: 25,
+            ),
           ),
-        )),
+        ),
         actions: [
           HolderScreenAppBarAction(initIndex: initIndex),
         ],

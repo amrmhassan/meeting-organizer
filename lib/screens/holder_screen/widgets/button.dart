@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:meeting_organizer/providers/meeting_provider.dart';
-import 'package:provider/provider.dart';
 
 Widget button({
   required BuildContext context,
@@ -24,17 +22,8 @@ Widget button({
 
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(50)))),
+          onPressed: onTap,
           child: Text(text),
-          onPressed: () {
-            var provider =
-                Provider.of<MeetingsProvider>(context, listen: false);
-            provider.addMeeting(
-                meetingName: 'meetingName',
-                groupId: 'groupId',
-                creatorId: 'creatorId');
-            print(provider.meetings);
-            Navigator.of(context).pop();
-          },
         ),
       ),
     );

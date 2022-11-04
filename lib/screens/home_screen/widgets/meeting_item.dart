@@ -56,17 +56,25 @@ class MeetingItem extends StatelessWidget {
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(10.0, 0, 20, 0),
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundImage:
-                              AssetImage('assets/icons/person.png'),
-                        ),
+                        child: meetingModel.creatorPhoto == null
+                            ? CircleAvatar(
+                                radius: 18,
+                                backgroundImage:
+                                    AssetImage('assets/icons/person.png'),
+                              )
+                            : CircleAvatar(
+                                radius: 18,
+                                backgroundImage:
+                                    NetworkImage(meetingModel.creatorPhoto!),
+                              ),
                       ),
-                      Text(
-                        meetingModel.creatorID,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 18),
+                      Expanded(
+                        child: Text(
+                          meetingModel.creatorName.toString(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                     ],
                   ),

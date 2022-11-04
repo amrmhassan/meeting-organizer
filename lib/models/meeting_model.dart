@@ -1,6 +1,3 @@
-import 'package:meeting_organizer/models/meeting_time_model.dart';
-import 'package:meeting_organizer/models/user_model.dart';
-
 class MeetingModel {
   late String meetingID;
   late String meetingName;
@@ -10,6 +7,8 @@ class MeetingModel {
   late List<dynamic> attendees;
   late List<dynamic> proposedTimes;
   String? topicDescription;
+  String? creatorPhoto;
+  String? creatorName;
   // late List<DateTime> proposedTimes;
 
   MeetingModel({
@@ -20,6 +19,8 @@ class MeetingModel {
     required this.createdTime,
     required this.proposedTimes,
     required this.attendees,
+    required this.creatorPhoto,
+    required this.creatorName,
     this.topicDescription,
   });
 
@@ -32,6 +33,8 @@ class MeetingModel {
     proposedTimes = json['proposedTimes'];
     attendees = json['attendees'];
     topicDescription = json['topicDescription'];
+    creatorPhoto = json['creatorPhoto'];
+    creatorName = json['creatorName'];
   }
   Map<String, dynamic> toJson() {
     return {
@@ -43,6 +46,8 @@ class MeetingModel {
       'proposedTimes': proposedTimes,
       'attendees': attendees,
       'topicDescription': topicDescription,
+      'creatorPhoto': creatorPhoto,
+      'creatorName': creatorName
     };
   }
 }

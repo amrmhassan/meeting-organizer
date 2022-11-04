@@ -13,25 +13,31 @@ class HomeScreen extends StatelessWidget {
     var meetingProvider = Provider.of<MeetingsProvider>(context);
     var reversedMeetings = meetingProvider.meetings.reversed.toList();
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) => MeetingItem(
-                meetingModel: reversedMeetings[index],
+      body: meetingProvider.meetings.isEmpty
+          ? Center(
+              child: Text(
+                'You have no meetings to vote',
               ),
-              separatorBuilder: (context, index) => SizedBox(
-                height: 16.0,
-              ),
-              itemCount: meetingProvider.meetings.length,
+            )
+          : Column(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) => MeetingItem(
+                      meetingModel: reversedMeetings[index],
+                    ),
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: 16.0,
+                    ),
+                    itemCount: meetingProvider.meetings.length,
+                  ),
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
+              ],
             ),
-          ),
-          SizedBox(
-            height: 16.0,
-          ),
-        ],
-      ),
     );
   }
 }

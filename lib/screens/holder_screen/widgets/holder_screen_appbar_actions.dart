@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/constants/golobal.dart';
 import 'package:meeting_organizer/helper/authentication.dart';
@@ -45,13 +47,20 @@ class _HolderScreenAppBarActionState extends State<HolderScreenAppBarAction> {
       Provider.of<MeetingsProvider>(context, listen: false).addMeeting(
         meetingName: meetingName.text,
         groupId: 'groupId',
-        creatorId: userId,
       );
+      setState(() {
+        meetingDate = null;
+        meetingTime = null;
+        meetingName.text = '';
+      });
+
+      Navigator.pop(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    User? currentUser = FirebaseAuth.instance.currentUser;
     return Row(
       children: [
         iconAdd(
@@ -70,10 +79,15 @@ class _HolderScreenAppBarActionState extends State<HolderScreenAppBarAction> {
           },
           child: Padding(
             padding: EdgeInsets.all(10.0),
-            child: CircleAvatar(
-              radius: 18,
-              backgroundImage: AssetImage('assets/icons/person.png'),
-            ),
+            child: currentUser?.photoURL == null
+                ? CircleAvatar(
+                    radius: 18,
+                    backgroundImage: AssetImage('assets/icons/person.png'),
+                  )
+                : CircleAvatar(
+                    radius: 18,
+                    backgroundImage: NetworkImage(currentUser!.photoURL!),
+                  ),
           ),
         ),
       ],
