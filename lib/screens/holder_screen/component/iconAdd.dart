@@ -23,7 +23,7 @@ void dialog(BuildContext context) => showDialog(
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(height: 12),
-              Text(
+              const Text(
                 'Create New Meeting',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,

@@ -7,8 +7,8 @@ class MeetingModel {
   late String groupID;
   late String creatorID;
   late DateTime createdTime;
-  late List<String> attendees;
-  late List<MeetingTimeModel> proposedTimes;
+  late List<dynamic> attendees;
+  late List<dynamic> proposedTimes;
   String? topicDescription;
   // late List<DateTime> proposedTimes;
 
@@ -28,7 +28,7 @@ class MeetingModel {
     meetingName = json['meetingName'];
     groupID = json['groupID'];
     creatorID = json['creatorID'];
-    createdTime = json['createdTime'];
+    createdTime = json['createdTime'].toDate();
     proposedTimes = json['proposedTimes'];
     attendees = json['attendees'];
     topicDescription = json['topicDescription'];
