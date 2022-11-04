@@ -6,7 +6,8 @@ import 'package:meeting_organizer/constants/fake_data.dart';
 import 'package:meeting_organizer/helper/authentication.dart';
 import 'package:meeting_organizer/providers/meeting_provider.dart';
 import 'package:meeting_organizer/screens/groups_screen/groups_screen.dart';
-import 'package:meeting_organizer/screens/holder_screen/component/iconAdd.dart';
+import 'package:meeting_organizer/screens/holder_screen/widgets/holder_screen_appbar_actions.dart';
+import 'package:meeting_organizer/screens/holder_screen/widgets/iconAdd.dart';
 import 'package:meeting_organizer/screens/home_screen/home_screen.dart';
 import 'package:meeting_organizer/screens/meetings_screen/meetings_screen.dart';
 import 'package:provider/provider.dart';
@@ -54,23 +55,7 @@ class _HolderScreenState extends State<HolderScreen> {
           ),
         )),
         actions: [
-          Row(
-            children: [
-              iconAdd(initIndex: initIndex, context: context),
-              GestureDetector(
-                onTap: () {
-                  Authentication().signOut();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: CircleAvatar(
-                    radius: 18,
-                    backgroundImage: AssetImage('assets/icons/person.png'),
-                  ),
-                ),
-              ),
-            ],
-          )
+          HolderScreenAppBarAction(initIndex: initIndex),
         ],
       ),
       body: screens[initIndex],

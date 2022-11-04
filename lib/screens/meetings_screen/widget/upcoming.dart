@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:meeting_organizer/screens/meetings_screen/upcoming/widgets/upcomingItems.dart';
+import 'package:meeting_organizer/screens/meetings_screen/widget/upcomingItems.dart';
 
 class Upcoming extends StatelessWidget {
   const Upcoming({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meeting_organizer/screens/meetings_screen/finished/component/check.dart';
+import 'package:meeting_organizer/screens/meetings_screen/widget/check.dart';
 
 class finishing_items extends StatelessWidget {
   @override

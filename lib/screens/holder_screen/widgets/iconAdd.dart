@@ -1,11 +1,30 @@
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/constants/colors.dart';
-import 'package:meeting_organizer/screens/holder_screen/component/button.dart';
+import 'package:meeting_organizer/screens/holder_screen/widgets/button.dart';
 
-Widget iconAdd({int initIndex = 1, required BuildContext context}) =>
+Widget iconAdd({
+  int initIndex = 1,
+  required BuildContext context,
+  required DateTime? meetingDate,
+  required TimeOfDay? meetingTime,
+  required Function(DateTime? t) setMeetingDate,
+  required Function(TimeOfDay? t) setMeetingTime,
+  required TextEditingController meetingName,
+  required VoidCallback addNewMeeting,
+}) =>
     initIndex == 1
         ? IconButton(
-            onPressed: () => dialog(context),
+            onPressed: () => dialog(
+              context: context,
+              meetingDate: meetingDate,
+              meetingTime: meetingTime,
+              setMeetingDate: setMeetingDate,
+              setMeetingTime: setMeetingTime,
+              meetingName: meetingName,
+              addNewMeeting: addNewMeeting,
+            ),
             icon: Icon(
               Icons.add,
               size: 35,
@@ -13,7 +32,16 @@ Widget iconAdd({int initIndex = 1, required BuildContext context}) =>
           )
         : Container();
 
-void dialog(BuildContext context) => showDialog(
+void dialog({
+  required BuildContext context,
+  required DateTime? meetingDate,
+  required TimeOfDay? meetingTime,
+  required Function(DateTime? t) setMeetingDate,
+  required Function(TimeOfDay? t) setMeetingTime,
+  required TextEditingController meetingName,
+  required VoidCallback addNewMeeting,
+}) =>
+    showDialog(
       builder: (context) => SingleChildScrollView(
         child: Dialog(
           shape: RoundedRectangleBorder(
@@ -37,7 +65,7 @@ void dialog(BuildContext context) => showDialog(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
@@ -46,6 +74,7 @@ void dialog(BuildContext context) => showDialog(
                       ),
                     ),
                     TextField(
+                      controller: meetingName,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Enter title for the meeting',
@@ -64,7 +93,17 @@ void dialog(BuildContext context) => showDialog(
                       child: Container(
                         width: double.infinity,
                         child: MaterialButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime.now().add(
+                                Duration(days: 60),
+                              ),
+                            );
+                            setMeetingDate(pickedDate);
+                          },
                           child: Column(
                             children: const [
                               Text('Meeting Date',
@@ -80,7 +119,13 @@ void dialog(BuildContext context) => showDialog(
                     ),
                     Expanded(
                       child: MaterialButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          TimeOfDay? time = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay.now(),
+                          );
+                          setMeetingTime(time);
+                        },
                         child: Column(
                           children: const [
                             Text(
@@ -106,14 +151,21 @@ void dialog(BuildContext context) => showDialog(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     button(
-                      context: context,
-                      backgroundColor: Colors.black,
-                      text: 'Cancel',
-                    ),
-                    button(
                         context: context,
-                        backgroundColor: kPrimaryColor,
-                        text: 'create')
+                        backgroundColor: Colors.black,
+                        text: 'Cancel',
+                        onTap: () {
+                          Navigator.pop(context);
+                        }),
+                    button(
+                      context: context,
+                      backgroundColor: kPrimaryColor,
+                      text: 'create',
+                      onTap: () {
+                        addNewMeeting();
+                        Navigator.pop(context);
+                      },
+                    )
                   ],
                 ),
               )

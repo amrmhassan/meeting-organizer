@@ -5,6 +5,7 @@ Widget button({
   required BuildContext context,
   Color backgroundColor = Colors.black,
   String text = '',
+  required VoidCallback onTap,
 }) =>
     SizedBox(
       height: 55,
@@ -21,7 +22,7 @@ Widget button({
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(50)))),
           child: Text(text),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: onTap,
         ),
       ),
     );

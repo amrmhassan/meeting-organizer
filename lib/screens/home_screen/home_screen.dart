@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var meetingProvider = Provider.of<MeetingsProvider>(context);
+    var reversedMeetings = meetingProvider.meetings.reversed.toList();
     return Scaffold(
       body: Column(
         children: [
@@ -18,7 +19,7 @@ class HomeScreen extends StatelessWidget {
             child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) => MeetingItem(
-                meetingModel: meetingProvider.meetings[index],
+                meetingModel: reversedMeetings[index],
               ),
               separatorBuilder: (context, index) => SizedBox(
                 height: 16.0,

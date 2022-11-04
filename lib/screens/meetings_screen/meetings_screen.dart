@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/constants/colors.dart';
-import 'package:meeting_organizer/screens/meetings_screen/finished/finished.dart';
-import 'package:meeting_organizer/screens/meetings_screen/upcoming/upcoming.dart';
+import 'package:meeting_organizer/screens/meetings_screen/widget/finished.dart';
+import 'package:meeting_organizer/screens/meetings_screen/widget/upcoming.dart';
 
 class MeetingsScreen extends StatefulWidget {
   const MeetingsScreen({super.key});
