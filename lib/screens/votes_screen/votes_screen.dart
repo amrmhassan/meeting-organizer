@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:meeting_organizer/constants/colors.dart';
+import 'package:meeting_organizer/models/meeting_model.dart';
 
 class VotesScreen extends StatefulWidget {
-  const VotesScreen({super.key});
+  final MeetingModel meetingModel;
+  const VotesScreen({
+    super.key,
+    required this.meetingModel,
+  });
 
   @override
   State<VotesScreen> createState() => _VotestState();

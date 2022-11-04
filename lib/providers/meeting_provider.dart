@@ -5,12 +5,23 @@ import 'package:meeting_organizer/models/user_model.dart';
 import 'package:uuid/uuid.dart';
 
 class MeetingsProvider with ChangeNotifier {
-  List<MeetingModel> meetings = [];
+  List<MeetingModel> _meetings = [];
+
+  List<MeetingModel> get meetings {
+    return [..._meetings];
+  }
+
+//? load fake data
+  void loadFakeMeetings(List<MeetingModel> m) {
+    _meetings = m;
+    notifyListeners();
+  }
 
   void getMeetings() {
     notifyListeners();
   }
 
+//? to add a new meeting
   void addMeeting({
     required String meetingName,
     required String groupId,
@@ -21,27 +32,30 @@ class MeetingsProvider with ChangeNotifier {
       meetingName: meetingName,
       groupID: groupId,
       creatorID: creatorId,
-      createdTime: DateTime.now().toString(),
+      createdTime: DateTime.now(),
       proposedTimes: [],
       attendees: [],
     );
-    meetings.add(newMeeting);
+    _meetings.add(newMeeting);
     notifyListeners();
   }
 
+//? to delete a meeting
   void deleteMeeting(String meetingID) {
-    meetings.removeWhere((meeting) => meeting.meetingID == meetingID);
+    _meetings.removeWhere((meeting) => meeting.meetingID == meetingID);
     notifyListeners();
   }
 
+//? get meeting by id
   MeetingModel? getMeetingById(String meetingID) {
-    for (var meeting in meetings) {
+    for (var meeting in _meetings) {
       if (meeting.meetingID == meetingID) return meeting;
     }
 
     return null;
   }
 
+//? add proposed time for meeting
   void addProposeTime(String meetingID, DateTime proposedTime) {
     var selectedMeeting = getMeetingById(meetingID);
     MeetingTimeModel newMeetingTime = MeetingTimeModel(
@@ -53,6 +67,7 @@ class MeetingsProvider with ChangeNotifier {
     notifyListeners();
   }
 
+//? remove proposes time from meeting
   void removeProposeTime(String meetingID, DateTime proposedTime) {
     var selectedMeeting = getMeetingById(meetingID);
     selectedMeeting!.proposedTimes.removeWhere(
@@ -61,12 +76,14 @@ class MeetingsProvider with ChangeNotifier {
     notifyListeners();
   }
 
+//? create a new vote for the meeting
   void addVote(String meetingID, DateTime proposedTime, UserModel voter) {
     var selectedMeeting = getMeetingById(meetingID);
     for (var time in selectedMeeting!.proposedTimes) {
-      if (time.proposedTime == proposedTime && !time.voters.contains(voter)) {
+      if (time.proposedTime == proposedTime &&
+          !time.voters.contains(voter.userID)) {
         time.votes += voter.weight;
-        time.voters.add(voter);
+        time.voters.add(voter.userID);
         notifyListeners();
       }
     }
@@ -75,9 +92,10 @@ class MeetingsProvider with ChangeNotifier {
   void removeVote(String meetingID, DateTime proposedTime, UserModel voter) {
     var selectedMeeting = getMeetingById(meetingID);
     for (var time in selectedMeeting!.proposedTimes) {
-      if (time.proposedTime == proposedTime && time.voters.contains(voter)) {
+      if (time.proposedTime == proposedTime &&
+          time.voters.contains(voter.userID)) {
         time.votes -= voter.weight;
-        time.voters.remove(voter);
+        time.voters.remove(voter.userID);
         notifyListeners();
       }
     }
@@ -85,16 +103,16 @@ class MeetingsProvider with ChangeNotifier {
 
   void addAttendee(String meetingID, UserModel attendee) {
     var selectedMeeting = getMeetingById(meetingID);
-    if (!selectedMeeting!.attendees.contains(attendee)) {
-      selectedMeeting.attendees.add(attendee);
+    if (!selectedMeeting!.attendees.contains(attendee.userID)) {
+      selectedMeeting.attendees.add(attendee.userID);
       notifyListeners();
     }
   }
 
   void removeAttendee(String meetingID, UserModel attendee) {
     var selectedMeeting = getMeetingById(meetingID);
-    if (selectedMeeting!.attendees.contains(attendee)) {
-      selectedMeeting.attendees.remove(attendee);
+    if (selectedMeeting!.attendees.contains(attendee.userID)) {
+      selectedMeeting.attendees.remove(attendee.userID);
       notifyListeners();
     }
   }

@@ -6,8 +6,8 @@ class MeetingModel {
   late String meetingName;
   late String groupID;
   late String creatorID;
-  late String createdTime;
-  late List<UserModel> attendees;
+  late DateTime createdTime;
+  late List<String> attendees;
   late List<MeetingTimeModel> proposedTimes;
   String? topicDescription;
   // late List<DateTime> proposedTimes;

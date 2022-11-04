@@ -1,16 +1,24 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:meeting_organizer/models/meeting_model.dart';
+import 'package:meeting_organizer/models/meeting_time_model.dart';
 import 'package:meeting_organizer/screens/votes_screen/votes_screen.dart';
 
 class MeetingItem extends StatelessWidget {
-  MeetingItem({super.key});
+  final MeetingModel meetingModel;
+  MeetingItem({
+    super.key,
+    required this.meetingModel,
+  });
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (builder) {
-          return VotesScreen();
+          return VotesScreen(
+            meetingModel: meetingModel,
+          );
         }));
       },
       child: Padding(
@@ -30,10 +38,10 @@ class MeetingItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.fromLTRB(22, 12, 22, 12),
                   child: Text(
-                    'Reading clean code book ',
+                    meetingModel.meetingName,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -45,7 +53,7 @@ class MeetingItem extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Row(
-                    children: const [
+                    children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(10.0, 0, 20, 0),
                         child: CircleAvatar(
@@ -55,7 +63,7 @@ class MeetingItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Profile Name',
+                        meetingModel.creatorID,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(fontSize: 18),

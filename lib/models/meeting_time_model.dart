@@ -1,9 +1,7 @@
-import 'package:meeting_organizer/models/user_model.dart';
-
 class MeetingTimeModel {
   late DateTime proposedTime;
   late int votes;
-  late List<UserModel> voters;
+  late List<String> voters;
 
   MeetingTimeModel({
     required this.proposedTime,

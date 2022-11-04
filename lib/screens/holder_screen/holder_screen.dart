@@ -2,11 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:meeting_organizer/constants/colors.dart';
+import 'package:meeting_organizer/constants/fake_data.dart';
 import 'package:meeting_organizer/helper/authentication.dart';
+import 'package:meeting_organizer/providers/meeting_provider.dart';
 import 'package:meeting_organizer/screens/groups_screen/groups_screen.dart';
 import 'package:meeting_organizer/screens/holder_screen/component/iconAdd.dart';
 import 'package:meeting_organizer/screens/home_screen/home_screen.dart';
 import 'package:meeting_organizer/screens/meetings_screen/meetings_screen.dart';
+import 'package:provider/provider.dart';
 
 class HolderScreen extends StatefulWidget {
   const HolderScreen({super.key});
@@ -25,6 +28,16 @@ class _HolderScreenState extends State<HolderScreen> {
   ];
 
   final List<String> titles = ['Groups', 'Home', 'Meetings'];
+
+  @override
+  void initState() {
+    Future.delayed(Duration.zero).then((value) {
+      //? loading the fake data to the app
+      Provider.of<MeetingsProvider>(context, listen: false)
+          .loadFakeMeetings(fake_meetings);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
