@@ -1,7 +1,7 @@
 class MeetingTimeModel {
   late DateTime proposedTime;
   late int votes;
-  late List<String> voters;
+  List<String> voters = [];
 
   MeetingTimeModel({
     required this.proposedTime,
@@ -9,9 +9,9 @@ class MeetingTimeModel {
     required this.voters,
   });
   MeetingTimeModel.fromJson(Map<String, dynamic> json) {
-    proposedTime = json['proposedTime'];
+    proposedTime = json['proposedTime'].toDate();
     votes = json['votes'];
-    voters = json['voters'];
+    json['voters'].forEach((voter) => voters.add(voter));
   }
   Map<String, dynamic> toJson() {
     return {

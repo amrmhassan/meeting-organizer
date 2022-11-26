@@ -1,11 +1,14 @@
+import 'package:meeting_organizer/models/meeting_time_model.dart';
+import 'package:meeting_organizer/models/user_model.dart';
+
 class MeetingModel {
   late String meetingID;
   late String meetingName;
   late String groupID;
   late String creatorID;
   late DateTime createdTime;
-  late List<dynamic> attendees;
-  late List<dynamic> proposedTimes;
+  List<UserModel> attendees = [];
+  List<MeetingTimeModel> proposedTimes = [];
   String? topicDescription;
   String? creatorPhoto;
   String? creatorName;
@@ -30,8 +33,10 @@ class MeetingModel {
     groupID = json['groupID'];
     creatorID = json['creatorID'];
     createdTime = json['createdTime'].toDate();
-    proposedTimes = json['proposedTimes'];
-    attendees = json['attendees'];
+    json['proposedTimes']
+        .forEach((time) => proposedTimes.add(MeetingTimeModel.fromJson(time)));
+    json['attendees']
+        .forEach((attendee) => attendees.add(UserModel.fromJson(attendee)));
     topicDescription = json['topicDescription'];
     creatorPhoto = json['creatorPhoto'];
     creatorName = json['creatorName'];

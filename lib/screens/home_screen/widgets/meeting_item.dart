@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/models/meeting_model.dart';
 import 'package:meeting_organizer/models/meeting_time_model.dart';
+import 'package:meeting_organizer/providers/meeting_provider.dart';
 import 'package:meeting_organizer/screens/votes_screen/votes_screen.dart';
+import 'package:provider/provider.dart';
 
 class MeetingItem extends StatelessWidget {
   final MeetingModel meetingModel;
@@ -13,7 +15,9 @@ class MeetingItem extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<MeetingsProvider>(context, listen: false);
     return GestureDetector(
+      onLongPress: () => provider.deleteMeeting(meetingModel.meetingID),
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (builder) {
           return VotesScreen(

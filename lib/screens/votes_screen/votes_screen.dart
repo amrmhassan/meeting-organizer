@@ -3,6 +3,10 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:meeting_organizer/constants/colors.dart';
 import 'package:meeting_organizer/models/meeting_model.dart';
+import 'package:meeting_organizer/models/meeting_time_model.dart';
+import 'package:meeting_organizer/models/user_model.dart';
+import 'package:meeting_organizer/providers/meeting_provider.dart';
+import 'package:provider/provider.dart';
 
 class VotesScreen extends StatefulWidget {
   final MeetingModel meetingModel;
@@ -19,6 +23,7 @@ class _VotestState extends State<VotesScreen> {
   bool _value = false;
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<MeetingsProvider>(context, listen: false);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
@@ -60,11 +65,14 @@ class _VotestState extends State<VotesScreen> {
                 height: 100,
                 width: double.infinity,
                 child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () => provider.removeProposeTime(
+                          widget.meetingModel.meetingID,
+                          DateTime(2022, 11, 28),
+                        ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      children: const [
                         Icon(
                           Icons.add,
                           size: 22,

@@ -23,7 +23,9 @@ class MeetingsProvider with ChangeNotifier {
   Future<void> getMeetings() async {
     var data =
         await FirebaseFirestore.instance.collection(MEETINGS_COLLECTION).get();
-    _meetings = data.docs.map((e) => MeetingModel.fromJson(e.data())).toList();
+    _meetings = data.docs.map((e) {
+      return MeetingModel.fromJson(e.data());
+    }).toList();
 
     notifyListeners();
   }
@@ -45,17 +47,24 @@ class MeetingsProvider with ChangeNotifier {
       creatorPhoto: currentUser.photoURL,
       creatorName: currentUser.displayName.toString(),
     );
-    _meetings.add(newMeeting);
     notifyListeners();
     await FirebaseFirestore.instance
         .collection(MEETINGS_COLLECTION)
         .doc(newMeeting.meetingID)
-        .set(newMeeting.toJson());
+        .set(newMeeting.toJson())
+        .then((value) => _meetings.add(newMeeting))
+        .catchError((e) => e.toString());
   }
 
 //? to delete a meeting
   void deleteMeeting(String meetingID) {
-    _meetings.removeWhere((meeting) => meeting.meetingID == meetingID);
+    FirebaseFirestore.instance
+        .collection(MEETINGS_COLLECTION)
+        .doc(meetingID)
+        .delete()
+        .then((value) =>
+            _meetings.removeWhere((meeting) => meeting.meetingID == meetingID))
+        .catchError((e) => e.toString());
     notifyListeners();
   }
 
@@ -76,30 +85,54 @@ class MeetingsProvider with ChangeNotifier {
       voters: [],
       votes: 0,
     );
-    selectedMeeting!.proposedTimes.add(newMeetingTime);
-    notifyListeners();
+    FirebaseFirestore.instance
+        .collection(MEETINGS_COLLECTION)
+        .doc(meetingID)
+        .update({
+      'proposedTime': FieldValue.arrayUnion([newMeetingTime.toJson()])
+    }).then((value) {
+      notifyListeners();
+      return selectedMeeting!.proposedTimes.add(newMeetingTime);
+    }).catchError((e) => print(e.toString()));
   }
 
 //? remove proposes time from meeting
   void removeProposeTime(String meetingID, DateTime proposedTime) {
     var selectedMeeting = getMeetingById(meetingID);
-    selectedMeeting!.proposedTimes.removeWhere(
+    MeetingTimeModel removedTime = selectedMeeting!.proposedTimes.firstWhere(
       (proposedTimeItem) => proposedTimeItem.proposedTime == proposedTime,
     );
+
+    FirebaseFirestore.instance
+        .collection(MEETINGS_COLLECTION)
+        .doc(meetingID)
+        .update({
+          'proposedTime': FieldValue.arrayRemove([removedTime.toJson()])
+        })
+        .then((value) => selectedMeeting.proposedTimes.remove(removedTime))
+        .catchError((e) => print(e.toString()));
     notifyListeners();
   }
 
 //? create a new vote for the meeting
-  void addVote(String meetingID, DateTime proposedTime, UserModel voter) {
+  void addVote(String meetingID, DateTime proposedTime, UserModel voter) async {
     var selectedMeeting = getMeetingById(meetingID);
-    for (var time in selectedMeeting!.proposedTimes) {
-      if (time.proposedTime == proposedTime &&
-          !time.voters.contains(voter.userID)) {
-        time.votes += voter.weight;
-        time.voters.add(voter.userID);
-        notifyListeners();
-      }
-    }
+    var doc = await FirebaseFirestore.instance
+        .collection(MEETINGS_COLLECTION)
+        .doc(meetingID)
+        .get();
+    List<dynamic> times = doc.get('proposedTime');
+    times.forEach((element) {
+      print(element.votes);
+    });
+    // for (var time in selectedMeeting!.proposedTimes) {
+    //   if (time.proposedTime == proposedTime &&
+    //       !time.voters.contains(voter.userID)) {
+    //     time.votes += voter.weight;
+    //     time.voters.add(voter.userID);
+    //     notifyListeners();
+    //   }
+    // }
   }
 
   void removeVote(String meetingID, DateTime proposedTime, UserModel voter) {
@@ -117,7 +150,7 @@ class MeetingsProvider with ChangeNotifier {
   void addAttendee(String meetingID, UserModel attendee) {
     var selectedMeeting = getMeetingById(meetingID);
     if (!selectedMeeting!.attendees.contains(attendee.userID)) {
-      selectedMeeting.attendees.add(attendee.userID);
+      selectedMeeting.attendees.add(attendee);
       notifyListeners();
     }
   }
