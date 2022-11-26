@@ -65,10 +65,7 @@ class _VotestState extends State<VotesScreen> {
                 height: 100,
                 width: double.infinity,
                 child: MaterialButton(
-                    onPressed: () => provider.removeProposeTime(
-                          widget.meetingModel.meetingID,
-                          DateTime(2022, 11, 28),
-                        ),
+                    onPressed: () {},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,

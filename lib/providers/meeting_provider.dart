@@ -89,7 +89,7 @@ class MeetingsProvider with ChangeNotifier {
         .collection(MEETINGS_COLLECTION)
         .doc(meetingID)
         .update({
-      'proposedTime': FieldValue.arrayUnion([newMeetingTime.toJson()])
+      'proposedTimes': FieldValue.arrayUnion([newMeetingTime.toJson()])
     }).then((value) {
       notifyListeners();
       return selectedMeeting!.proposedTimes.add(newMeetingTime);
@@ -107,32 +107,35 @@ class MeetingsProvider with ChangeNotifier {
         .collection(MEETINGS_COLLECTION)
         .doc(meetingID)
         .update({
-          'proposedTime': FieldValue.arrayRemove([removedTime.toJson()])
-        })
-        .then((value) => selectedMeeting.proposedTimes.remove(removedTime))
-        .catchError((e) => print(e.toString()));
-    notifyListeners();
+      'proposedTimes': FieldValue.arrayRemove([removedTime.toJson()])
+    }).then((value) {
+      notifyListeners();
+      return selectedMeeting.proposedTimes.remove(removedTime);
+    }).catchError((e) => print(e.toString()));
   }
 
 //? create a new vote for the meeting
-  void addVote(String meetingID, DateTime proposedTime, UserModel voter) async {
+  void addVote(String meetingID, DateTime proposedTime, UserModel voter) {
     var selectedMeeting = getMeetingById(meetingID);
-    var doc = await FirebaseFirestore.instance
-        .collection(MEETINGS_COLLECTION)
-        .doc(meetingID)
-        .get();
-    List<dynamic> times = doc.get('proposedTime');
-    times.forEach((element) {
-      print(element.votes);
-    });
-    // for (var time in selectedMeeting!.proposedTimes) {
-    //   if (time.proposedTime == proposedTime &&
-    //       !time.voters.contains(voter.userID)) {
-    //     time.votes += voter.weight;
-    //     time.voters.add(voter.userID);
-    //     notifyListeners();
-    //   }
-    // }
+    for (var time in selectedMeeting!.proposedTimes) {
+      if (time.proposedTime == proposedTime &&
+          !time.voters.contains(voter.userID)) {
+        time.votes += voter.weight;
+        time.voters.add(voter.userID);
+        FirebaseFirestore.instance
+            .collection(MEETINGS_COLLECTION)
+            .doc(meetingID)
+            .update({
+              'proposedTimes': selectedMeeting.proposedTimes
+                  .map(
+                    (e) => e.toJson(),
+                  )
+                  .toList()
+            })
+            .then((value) => notifyListeners())
+            .catchError((e) => print(e.toString()));
+      }
+    }
   }
 
   void removeVote(String meetingID, DateTime proposedTime, UserModel voter) {
@@ -142,24 +145,64 @@ class MeetingsProvider with ChangeNotifier {
           time.voters.contains(voter.userID)) {
         time.votes -= voter.weight;
         time.voters.remove(voter.userID);
-        notifyListeners();
+        FirebaseFirestore.instance
+            .collection(MEETINGS_COLLECTION)
+            .doc(meetingID)
+            .update({
+              'proposedTimes': selectedMeeting.proposedTimes
+                  .map(
+                    (e) => e.toJson(),
+                  )
+                  .toList()
+            })
+            .then((value) => notifyListeners())
+            .catchError((e) => print(e.toString()));
       }
     }
   }
 
   void addAttendee(String meetingID, UserModel attendee) {
     var selectedMeeting = getMeetingById(meetingID);
-    if (!selectedMeeting!.attendees.contains(attendee.userID)) {
+    bool isFound = selectedMeeting!.attendees
+        .any((element) => element.userID == attendee.userID);
+    if (!isFound) {
+      attendee.weight++;
       selectedMeeting.attendees.add(attendee);
-      notifyListeners();
+      FirebaseFirestore.instance
+          .collection(MEETINGS_COLLECTION)
+          .doc(meetingID)
+          .update({
+            'attendees': selectedMeeting.attendees
+                .map(
+                  (e) => e.toJson(),
+                )
+                .toList()
+          })
+          .then((value) => notifyListeners())
+          .catchError((e) => print(e.toString()));
     }
   }
 
   void removeAttendee(String meetingID, UserModel attendee) {
     var selectedMeeting = getMeetingById(meetingID);
-    if (selectedMeeting!.attendees.contains(attendee.userID)) {
-      selectedMeeting.attendees.remove(attendee.userID);
-      notifyListeners();
+    bool isFound = selectedMeeting!.attendees
+        .any((element) => element.userID == attendee.userID);
+    if (isFound) {
+      attendee.weight--;
+      selectedMeeting.attendees
+          .removeWhere((element) => element.userID == attendee.userID);
+      FirebaseFirestore.instance
+          .collection(MEETINGS_COLLECTION)
+          .doc(meetingID)
+          .update({
+            'attendees': selectedMeeting.attendees
+                .map(
+                  (e) => e.toJson(),
+                )
+                .toList()
+          })
+          .then((value) => notifyListeners())
+          .catchError((e) => print(e.toString()));
     }
   }
 }
