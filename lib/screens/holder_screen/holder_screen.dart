@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:meeting_organizer/constants/colors.dart';
 import 'package:meeting_organizer/providers/meeting_provider.dart';
-import 'package:meeting_organizer/screens/groups_screen/groups_screen.dart';
+import 'package:meeting_organizer/screens/groups_screen/groups.dart';
 import 'package:meeting_organizer/screens/holder_screen/widgets/holder_screen_appbar_actions.dart';
 import 'package:meeting_organizer/screens/home_screen/home_screen.dart';
 import 'package:meeting_organizer/screens/meetings_screen/meetings_screen.dart';

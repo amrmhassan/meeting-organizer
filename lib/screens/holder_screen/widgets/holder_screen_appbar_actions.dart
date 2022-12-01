@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:meeting_organizer/constants/golobal.dart';
 import 'package:meeting_organizer/helper/authentication.dart';
 import 'package:meeting_organizer/providers/meeting_provider.dart';
+import 'package:meeting_organizer/screens/holder_screen/widgets/groubAdd_Icon.dart';
 import 'package:meeting_organizer/screens/holder_screen/widgets/iconAdd.dart';
 import 'package:provider/provider.dart';
 
@@ -63,6 +64,10 @@ class _HolderScreenAppBarActionState extends State<HolderScreenAppBarAction> {
     User? currentUser = FirebaseAuth.instance.currentUser;
     return Row(
       children: [
+        defaultIcon_buttom(
+          initIndex: widget.initIndex,
+            context: context
+        ),
         iconAdd(
           initIndex: widget.initIndex,
           context: context,
