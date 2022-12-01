@@ -9,6 +9,8 @@ import 'package:uuid/uuid.dart';
 
 class MeetingsProvider with ChangeNotifier {
   List<MeetingModel> _meetings = [];
+  bool loadingMeetings = true;
+  bool uploadingMeeting = false;
 
   List<MeetingModel> get meetings {
     return [..._meetings];
@@ -21,11 +23,20 @@ class MeetingsProvider with ChangeNotifier {
   }
 
   Future<void> getMeetings() async {
-    var data =
-        await FirebaseFirestore.instance.collection(MEETINGS_COLLECTION).get();
-    _meetings = data.docs.map((e) {
-      return MeetingModel.fromJson(e.data());
-    }).toList();
+    loadingMeetings = true;
+    notifyListeners();
+    try {
+      var data = await FirebaseFirestore.instance
+          .collection(MEETINGS_COLLECTION)
+          .get();
+      _meetings = data.docs.map((e) {
+        return MeetingModel.fromJson(e.data());
+      }).toList();
+    } catch (E) {
+      //
+    }
+
+    loadingMeetings = false;
 
     notifyListeners();
   }
@@ -35,6 +46,8 @@ class MeetingsProvider with ChangeNotifier {
     required String meetingName,
     required String groupId,
   }) async {
+    uploadingMeeting = true;
+    notifyListeners();
     User? currentUser = FirebaseAuth.instance.currentUser;
     MeetingModel newMeeting = MeetingModel(
       meetingID: const Uuid().v4(),
@@ -47,13 +60,18 @@ class MeetingsProvider with ChangeNotifier {
       creatorPhoto: currentUser.photoURL,
       creatorName: currentUser.displayName.toString(),
     );
-    notifyListeners();
-    await FirebaseFirestore.instance
+
+    FirebaseFirestore.instance
         .collection(MEETINGS_COLLECTION)
         .doc(newMeeting.meetingID)
         .set(newMeeting.toJson())
-        .then((value) => _meetings.add(newMeeting))
-        .catchError((e) => e.toString());
+        .then((value) {
+      _meetings.insert(0, newMeeting);
+      uploadingMeeting = false;
+      notifyListeners();
+    }).catchError((e) {
+      e.toString();
+    });
   }
 
 //? to delete a meeting
