@@ -32,6 +32,9 @@ class MeetingsProvider with ChangeNotifier {
       _meetings = data.docs.map((e) {
         return MeetingModel.fromJson(e.data());
       }).toList();
+      _meetings.sort(
+        (a, b) => b.createdTime.compareTo(a.createdTime),
+      );
     } catch (E) {
       //
     }
