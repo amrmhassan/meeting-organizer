@@ -1,12 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:meeting_organizer/constants/colors.dart';
 import 'package:meeting_organizer/models/meeting_model.dart';
-import 'package:meeting_organizer/models/meeting_time_model.dart';
-import 'package:meeting_organizer/models/user_model.dart';
-import 'package:meeting_organizer/providers/meeting_provider.dart';
-import 'package:provider/provider.dart';
 
 class VotesScreen extends StatefulWidget {
   final MeetingModel meetingModel;
@@ -23,7 +19,6 @@ class _VotestState extends State<VotesScreen> {
   bool _value = false;
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<MeetingsProvider>(context, listen: false);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
@@ -38,19 +33,17 @@ class _VotestState extends State<VotesScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Container(
-                child: Text(
-                  'Vote for the meeting time ',
-                  style: TextStyle(
-                    fontSize: 28,
-                  ),
+              child: Text(
+                'Vote for the meeting time ',
+                style: TextStyle(
+                  fontSize: 28,
                 ),
               ),
             ),
             Expanded(
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) => listitem(),
+                itemBuilder: (context, index) => listItem(),
                 separatorBuilder: (context, index) => SizedBox(
                   height: 5.0,
                 ),
@@ -61,7 +54,7 @@ class _VotestState extends State<VotesScreen> {
               height: 5.0,
             ),
             Center(
-              child: Container(
+              child: SizedBox(
                 height: 100,
                 width: double.infinity,
                 child: MaterialButton(
@@ -90,7 +83,7 @@ class _VotestState extends State<VotesScreen> {
         ));
   }
 
-  Widget listitem() => SizedBox(
+  Widget listItem() => SizedBox(
         width: double.infinity,
         child: Center(
           child: Padding(
