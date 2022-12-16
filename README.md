@@ -1,16 +1,11 @@
-# meeting_organizer
+# won't start the next stage without fixing the last stages(Reem, Kyrollos)
+-- naming of classes
+-- putting files all in it's place
+-- making comments
+-- separate each widget in a separate file
+-- making branches for each member
+-- --------------------
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# next stage is split in half
+-- 1) making votes for each meeting(Mohammed Salah)
+-- 2) controlling groups (CRUD)( BOdy)

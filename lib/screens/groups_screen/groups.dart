@@ -4,16 +4,16 @@ import 'package:meeting_organizer/models/group_model.dart';
 import 'package:meeting_organizer/screens/groups_screen/groub_meetings.dart';
 import 'package:meeting_organizer/screens/groups_screen/widgets/card.dart';
 
-class GroupsScreen extends StatelessWidget {
-  List<GroupModel> groups = [
-    GroupModel(
-        groupID: 'groupID',
-        creatorID: 'creatorID',
-        members: [],
-        groupName: 'SPE Group'),
-  ];
+List<GroupModel> groups = [
+  GroupModel(
+      groupID: 'groupID',
+      creatorID: 'creatorID',
+      members: [],
+      groupName: 'SPE Group'),
+];
 
-  GroupsScreen({super.key});
+class GroupsScreen extends StatelessWidget {
+  const GroupsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,15 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-
+import 'package:meeting_organizer/screens/groups_screen/widgets/checkbox_tile.dart';
 import '../../constants/colors.dart';
 
 class GroupScreen extends StatefulWidget {
   @override
   State<GroupScreen> createState() => _GroupScreenState();
 }
-
-bool _value = false;
 
 class _GroupScreenState extends State<GroupScreen> {
   @override
@@ -26,6 +24,7 @@ class _GroupScreenState extends State<GroupScreen> {
               color: Colors.white,
               Icons.arrow_back_ios,
             )),
+        //? title of the group
         title: Text(
           'Group meeting',
           style: TextStyle(
@@ -49,7 +48,7 @@ class _GroupScreenState extends State<GroupScreen> {
           ),
           Expanded(
             child: ListView.separated(
-                itemBuilder: (context, index) => _checkBoxTile(),
+                itemBuilder: (context, index) => CheckBoxTile(),
                 separatorBuilder: (context, index) => SizedBox(
                       height: 20,
                     ),
@@ -85,34 +84,6 @@ class _GroupScreenState extends State<GroupScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _checkBoxTile extends StatefulWidget {
-  const _checkBoxTile({Key? key}) : super(key: key);
-
-  @override
-  State<_checkBoxTile> createState() => _checkBoxTileState();
-}
-
-class _checkBoxTileState extends State<_checkBoxTile> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: CheckboxListTile(
-        title: const Text('Tomorrow  12:00'),
-        activeColor: kPrimaryColor,
-        value: _value,
-        selected: _value,
-        onChanged: (value) {
-          setState(() {
-            _value = value!;
-          });
-        },
-        secondary: const Icon(Icons.access_time),
       ),
     );
   }
