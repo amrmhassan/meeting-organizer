@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/models/group_model.dart';
-import 'package:meeting_organizer/screens/groups_screen/groub_meetings.dart';
+import 'package:meeting_organizer/screens/groups_screen/groubMeetings.dart';
 import 'package:meeting_organizer/screens/groups_screen/widgets/card.dart';
 
 List<GroupModel> groups = [
@@ -19,11 +19,11 @@ class GroupsScreen extends StatelessWidget {
     return Scaffold(
       body: ListView.separated(
           itemBuilder: (context, index) {
-            return defaultCard(
+            return DefaultCard(
               groups[index],
               ontap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => GroupScreen()));
+                    MaterialPageRoute(builder: (context) => groupScreen()));
               },
             );
           },

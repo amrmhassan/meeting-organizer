@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/constants/colors.dart';
-
-class CheckBoxTile extends StatefulWidget {
-  const CheckBoxTile({Key? key}) : super(key: key);
-
+// checkBix widget class
+//display meeting time and check for the the the selected meeting
+class checkBoxTile extends StatefulWidget {
+  const checkBoxTile({Key? key}) : super(key: key);
   @override
-  State<CheckBoxTile> createState() => _CheckBoxTileState();
+  State<checkBoxTile> createState() => checkBoxTileState();
 }
-
-class _CheckBoxTileState extends State<CheckBoxTile> {
+class checkBoxTileState extends State<checkBoxTile> {
   bool _value = false;
 
   @override

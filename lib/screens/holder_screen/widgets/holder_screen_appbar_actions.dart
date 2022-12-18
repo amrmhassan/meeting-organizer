@@ -64,7 +64,7 @@ class _HolderScreenAppBarActionState extends State<HolderScreenAppBarAction> {
     User? currentUser = FirebaseAuth.instance.currentUser;
     return Row(
       children: [
-        defaultIcon_buttom(
+        GroupsActionIcon(
           initIndex: widget.initIndex,
             context: context
         ),

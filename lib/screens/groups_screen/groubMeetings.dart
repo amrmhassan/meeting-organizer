@@ -1,15 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:meeting_organizer/screens/groups_screen/widgets/checkbox_tile.dart';
+import 'package:meeting_organizer/screens/groups_screen/widgets/checkboxTile.dart';
 import '../../constants/colors.dart';
 
-class GroupScreen extends StatefulWidget {
+class groupScreen extends StatefulWidget {
   @override
-  State<GroupScreen> createState() => _GroupScreenState();
+  State<groupScreen> createState() => groupScreenState();
 }
-
-class _GroupScreenState extends State<GroupScreen> {
+class groupScreenState extends State<groupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +47,7 @@ class _GroupScreenState extends State<GroupScreen> {
           ),
           Expanded(
             child: ListView.separated(
-                itemBuilder: (context, index) => CheckBoxTile(),
+                itemBuilder: (context, index) => checkBoxTile(),
                 separatorBuilder: (context, index) => SizedBox(
                       height: 20,
                     ),
