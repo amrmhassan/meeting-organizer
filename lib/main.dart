@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-       // home: Authentication().handleAuthState(),
-        home:HolderScreen(),
+        home: Authentication().handleAuthState(),
+        // home:HolderScreen(),
       ),
     );
   }
