@@ -24,14 +24,22 @@ class MeetingsProvider with ChangeNotifier {
 
   Future<void> getMeetings() async {
     loadingMeetings = true;
+    _meetings.clear();
     notifyListeners();
     try {
+      User? user = FirebaseAuth.instance.currentUser;
       var data = await FirebaseFirestore.instance
           .collection(MEETINGS_COLLECTION)
           .get();
-      _meetings = data.docs.map((e) {
-        return MeetingModel.fromJson(e.data());
-      }).toList();
+      for (var meeting in data.docs) {
+        MeetingModel meetingModel = MeetingModel.fromJson(meeting.data());
+        if (user?.uid == meetingModel.creatorID ||
+            meetingModel.attendees
+                .any((element) => element.userID == user?.uid)) {
+          _meetings.add(meetingModel);
+        }
+      }
+
       _meetings.sort(
         (a, b) => b.createdTime.compareTo(a.createdTime),
       );
