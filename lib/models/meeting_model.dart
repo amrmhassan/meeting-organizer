@@ -48,8 +48,10 @@ class MeetingModel {
       'groupID': groupID,
       'creatorID': creatorID,
       'createdTime': createdTime,
-      'proposedTimes': proposedTimes,
-      'attendees': attendees,
+      'proposedTimes': List.generate(
+          proposedTimes.length, (index) => proposedTimes[index].toJson()),
+      'attendees':
+          List.generate(attendees.length, (index) => attendees[index].toJson()),
       'topicDescription': topicDescription,
       'creatorPhoto': creatorPhoto,
       'creatorName': creatorName

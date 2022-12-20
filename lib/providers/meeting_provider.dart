@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:meeting_organizer/constants/golobal.dart';
 import 'package:meeting_organizer/models/meeting_model.dart';
@@ -20,6 +21,16 @@ class MeetingsProvider with ChangeNotifier {
   void loadFakeMeetings(List<MeetingModel> m) {
     _meetings = m;
     notifyListeners();
+  }
+
+  createUserModel() {
+    User? user = FirebaseAuth.instance.currentUser;
+    return UserModel(
+        userID: user!.uid,
+        userGID: 'groupId',
+        weight: 1,
+        userImage: user.photoURL!,
+        userName: user.displayName!);
   }
 
   Future<void> getMeetings() async {
@@ -56,6 +67,7 @@ class MeetingsProvider with ChangeNotifier {
   addMeeting({
     required String meetingName,
     required String groupId,
+    required MeetingTimeModel initTime,
   }) async {
     uploadingMeeting = true;
     notifyListeners();
@@ -66,12 +78,11 @@ class MeetingsProvider with ChangeNotifier {
       groupID: groupId,
       creatorID: currentUser!.uid,
       createdTime: DateTime.now(),
-      proposedTimes: [],
+      proposedTimes: [initTime],
       attendees: [],
       creatorPhoto: currentUser.photoURL,
       creatorName: currentUser.displayName.toString(),
     );
-
     FirebaseFirestore.instance
         .collection(MEETINGS_COLLECTION)
         .doc(newMeeting.meetingID)
@@ -107,10 +118,12 @@ class MeetingsProvider with ChangeNotifier {
   }
 
 //? add proposed time for meeting
-  void addProposeTime(String meetingID, DateTime proposedTime) {
+  void addProposeTime(
+      String meetingID, DateTime proposedDate, TimeOfDay proposedTime) {
     var selectedMeeting = getMeetingById(meetingID);
     MeetingTimeModel newMeetingTime = MeetingTimeModel(
-      proposedTime: proposedTime,
+      proposedDate: proposedDate,
+      proposedTime: proposedTime.toString(),
       voters: [],
       votes: 0,
     );
@@ -120,8 +133,8 @@ class MeetingsProvider with ChangeNotifier {
         .update({
       'proposedTimes': FieldValue.arrayUnion([newMeetingTime.toJson()])
     }).then((value) {
+      selectedMeeting!.proposedTimes.add(newMeetingTime);
       notifyListeners();
-      return selectedMeeting!.proposedTimes.add(newMeetingTime);
     }).catchError((e) => print(e.toString()));
   }
 
@@ -147,7 +160,7 @@ class MeetingsProvider with ChangeNotifier {
   void addVote(String meetingID, DateTime proposedTime, UserModel voter) {
     var selectedMeeting = getMeetingById(meetingID);
     for (var time in selectedMeeting!.proposedTimes) {
-      if (time.proposedTime == proposedTime &&
+      if (time.proposedDate == proposedTime &&
           !time.voters.contains(voter.userID)) {
         time.votes += voter.weight;
         time.voters.add(voter.userID);
@@ -170,7 +183,7 @@ class MeetingsProvider with ChangeNotifier {
   void removeVote(String meetingID, DateTime proposedTime, UserModel voter) {
     var selectedMeeting = getMeetingById(meetingID);
     for (var time in selectedMeeting!.proposedTimes) {
-      if (time.proposedTime == proposedTime &&
+      if (time.proposedDate == proposedTime &&
           time.voters.contains(voter.userID)) {
         time.votes -= voter.weight;
         time.voters.remove(voter.userID);

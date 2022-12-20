@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/helper/authentication.dart';
 import 'package:meeting_organizer/providers/meeting_provider.dart';
+import 'package:meeting_organizer/screens/holder_screen/holder_screen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Authentication().handleAuthState(),
-        // home:HolderScreen(),
+        // home: HolderScreen(),
       ),
     );
   }

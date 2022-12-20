@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meeting_organizer/constants/golobal.dart';
 import 'package:meeting_organizer/helper/authentication.dart';
+import 'package:meeting_organizer/models/meeting_time_model.dart';
 import 'package:meeting_organizer/providers/meeting_provider.dart';
 import 'package:meeting_organizer/screens/holder_screen/widgets/groubAdd_Icon.dart';
 import 'package:meeting_organizer/screens/holder_screen/widgets/iconAdd.dart';
@@ -46,9 +47,14 @@ class _HolderScreenAppBarActionState extends State<HolderScreenAppBarAction> {
         meetingName.text.isNotEmpty) {
       //? add the new meeting code here
       Provider.of<MeetingsProvider>(context, listen: false).addMeeting(
-        meetingName: meetingName.text,
-        groupId: 'groupId',
-      );
+          meetingName: meetingName.text,
+          groupId: 'groupId',
+          initTime: MeetingTimeModel(
+            proposedDate: meetingDate!,
+            proposedTime: meetingTime!.toString(),
+            votes: 0,
+            voters: [],
+          ));
       setState(() {
         meetingDate = null;
         meetingTime = null;
@@ -64,10 +70,7 @@ class _HolderScreenAppBarActionState extends State<HolderScreenAppBarAction> {
     User? currentUser = FirebaseAuth.instance.currentUser;
     return Row(
       children: [
-        GroupsActionIcon(
-          initIndex: widget.initIndex,
-            context: context
-        ),
+        GroupsActionIcon(initIndex: widget.initIndex, context: context),
         iconAdd(
           initIndex: widget.initIndex,
           context: context,
