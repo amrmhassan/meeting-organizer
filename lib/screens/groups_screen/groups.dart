@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:meeting_organizer/models/group_model.dart';
 import 'package:meeting_organizer/screens/groups_screen/groubMeetings.dart';
 import 'package:meeting_organizer/screens/groups_screen/widgets/card.dart';
+import 'package:meeting_organizer/screens/groups_screen/widgets/separator.dart';
 
 List<GroupModel> groups = [
   GroupModel(
@@ -19,17 +20,20 @@ class GroupsScreen extends StatelessWidget {
     return Scaffold(
       body: ListView.separated(
           itemBuilder: (context, index) {
-            return DefaultCard(
-              groups[index],
-              ontap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => groupScreen()));
-              },
+            return DefaultCardView(
+              onTap:()
+              {
+                Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => groupScreen(),
+                  ));
+               },
+              groupIcon: Icons.group,
+              groupName: groups[index].groupName,
+              members: groups[index].members.toString(),
             );
           },
-          separatorBuilder: (context, index) => SizedBox(
-                height: 0.1,
-              ),
+          separatorBuilder: (context, index)
+          => ItemSeparator(),
           itemCount: groups.length),
     );
   }
